@@ -28,6 +28,7 @@ public class ChatController {
 		return chatMessage;
 	}
 
+	// this listner for
 	@MessageMapping("/chat.addUser")
 	@SendTo("/topic/public")
 	public ResponseEntity<?> addUser(@Payload ChatInfo chatMessage, SimpMessageHeaderAccessor headerAccessor) {
