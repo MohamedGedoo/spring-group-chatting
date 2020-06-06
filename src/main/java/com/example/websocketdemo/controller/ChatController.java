@@ -12,12 +12,20 @@ import com.example.websocketdemo.model.ChatInfo;
 import com.example.websocketdemo.service.FileOperationService;
 import com.example.websocketdemo.util.Utils;
 
+/**
+ * This controller responsible for receiving messages from one client and then
+ * broadcasting it to others.
+ */
 @Controller
 public class ChatController {
 
 	@Autowired
 	private FileOperationService fileOperationService;
 
+	
+	/**
+	 * get message from one user and broadcasting it to others
+	 * */
 	@MessageMapping("/chat.sendMessage")
 	@SendTo("/topic/public")
 	public ChatInfo sendMessage(@Payload ChatInfo chatMessage) {
@@ -25,7 +33,9 @@ public class ChatController {
 		return chatMessage;
 	}
 
-	// this listner for
+	/**
+	 * Add new user to the chat group
+	 * */
 	@MessageMapping("/chat.addUser")
 	@SendTo("/topic/public")
 	public ResponseEntity<?> addUser(@Payload ChatInfo chatMessage, SimpMessageHeaderAccessor headerAccessor) {

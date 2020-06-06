@@ -13,10 +13,8 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import com.example.websocketdemo.model.ChatInfo;
 
 /**
- * listener to listen to a socket waiting for receiving text messages from the
- * clients
- * 
- * 
+ *  listener to listen for socket connect and disconnect events
+ *  
  * @author mkarim@ntgclarity.com
  * 
  */
@@ -24,7 +22,7 @@ import com.example.websocketdemo.model.ChatInfo;
 @Component
 public class WebSocketEventListener {
 
-	private  final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
+	private final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
 	@Autowired
 	private SimpMessageSendingOperations messagingTemplate;
@@ -34,6 +32,10 @@ public class WebSocketEventListener {
 		logger.info("Received a new web socket connection");
 	}
 
+	
+	/**
+	 * listen when a user leaves the chat 
+	 * */
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
 		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());

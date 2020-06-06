@@ -111,7 +111,7 @@ public class FileOperationService {
 	}
 
 	/**
-	 * Dump Conversations into file with username for each user
+	 * Dump Conversation into file with username for each user
 	 *
 	 */
 	public void dumpConversations() {
@@ -153,17 +153,6 @@ public class FileOperationService {
 				frequencies.append(System.getProperty("line.separator"));
 				frequencies.append(key + " --> " + Utils.wordsFrequency.get(key));
 			}
-
-			/*
-			 * Path pathOfLog = Paths.get(fileName); Charset charSetOfLog =
-			 * Charset.forName("US-ASCII"); BufferedWriter bwOfLog =
-			 * Files.newBufferedWriter(pathOfLog, charSetOfLog);
-			 * 
-			 * bwOfLog.newLine(); // Add new line bwOfLog.write(new
-			 * SimpleDateFormat("yyyy-MM-dd HH:mm' Conversation '").format(new Date()));
-			 * bwOfLog.newLine(); bwOfLog.write( frequencies.toString()); bwOfLog.flush();
-			 * bwOfLog.close();
-			 */
 
 			if (file.exists()) {
 				// Set true for append mode

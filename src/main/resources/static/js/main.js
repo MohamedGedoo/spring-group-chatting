@@ -21,7 +21,10 @@ var colors = ['#2196F3', '#32c787', '#00BCD4', '#ff5652', '#ffc107',
     '#ff85af', '#FF9800', '#39bbb0'];
 
 
-
+/**
+ * This method to authintecate user(username && password)
+ * @param {*} event 
+ */
 function authintecate(event) {
 
     username = document.querySelector('#name').value.trim();
@@ -37,8 +40,8 @@ function authintecate(event) {
 
         http.onreadystatechange = function () {//Call a function when the state changes.
             if (http.readyState == 4 && http.status == 200) {
-            	 messageErrorElement.classList.add('hidden');
-            	connect();
+                messageErrorElement.classList.add('hidden');
+                connect();
             } else {
                 messageErrorElement.classList.remove('hidden');
             }
@@ -48,12 +51,16 @@ function authintecate(event) {
             password: password
         }));
     } else {
-    	messageErrorElement.classList.remove('hidden');
+        messageErrorElement.classList.remove('hidden');
     }
     event.preventDefault();
 }
 
-
+/***
+ * this method uses SockJS and stomp client to connect to the /ws endpoint
+ *  in backend.
+ * Upon successful connection, the client subscribes to /topic/public destination 
+ */
 function connect() {
 
 
@@ -65,6 +72,9 @@ function connect() {
     chatPage.classList.remove('hidden');
 }
 
+/**
+ * In this method call backend to add new user to the chatt
+ */
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
@@ -97,7 +107,10 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
-
+/**
+ * display and format the messages on the screen.
+ * @param {*} payload 
+ */
 function onMessageReceived(payload) {
     var message = null;
     var testPay = JSON.parse(payload.body);
@@ -144,7 +157,10 @@ function onMessageReceived(payload) {
         chatEndPage.classList.remove('hidden');
     }
 }
-
+/**
+ * Give every joined user an avatar 
+ * @param {*} messageSender 
+ */
 function getAvatarColor(messageSender) {
     var hash = 0;
     for (var i = 0; i < messageSender.length; i++) {
